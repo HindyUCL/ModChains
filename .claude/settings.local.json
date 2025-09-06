@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/karlovrancic/**)",
+      "Bash(ruby --version)",
+      "Bash(export:*)",
+      "WebFetch(domain:dev.algorand.co)",
+      "WebFetch(domain:github.com)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
