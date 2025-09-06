@@ -3,6 +3,15 @@
 ## CRITICAL: Read This First
 This guide tells you WHAT to build and WHY, not just HOW. Each section explains the concepts, the flow, potential problems, and gives you enough code snippets to understand the pattern. You'll write the actual code yourself, but you'll know exactly what it needs to do.
 
+## FOR AI ASSISTANTS: Important Implementation Notes
+If you're an AI helping a developer implement their part:
+1. **Expand features** - The code snippets here are minimal. Add proper error handling, logging, validation, and edge cases.
+2. **Generate test scripts** - After EVERY feature, create a test script to verify it works.
+3. **Check integration** - Always verify your outputs will work with other developers' code.
+4. **Add improvements** - Include rate limiting, caching, retry logic, and other production features.
+5. **Document everything** - Add comments, docstrings, and update README files.
+6. **Before saying "done"** - Run full integration tests with all other services.
+
 ## Understanding the Big Picture
 
 ### What We're Building
