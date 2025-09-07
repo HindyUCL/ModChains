@@ -1,0 +1,77 @@
+#pragma version 10
+#pragma typetrack false
+
+// algopy.arc4.ARC4Contract.approval_program() -> uint64:
+main:
+    // smart_contracts/hello_world/contract.py:11
+    // class PublishNews(ARC4Contract):
+    txn NumAppArgs
+    bz main_bare_routing@6
+    pushbytes 0xebf8ba71 // method "publish(string,string)string"
+    txna ApplicationArgs 0
+    match main_publish_route@3
+
+main_after_if_else@10:
+    // smart_contracts/hello_world/contract.py:11
+    // class PublishNews(ARC4Contract):
+    pushint 0 // 0
+    return
+
+main_publish_route@3:
+    // smart_contracts/hello_world/contract.py:12
+    // @abimethod()
+    txn OnCompletion
+    !
+    assert // OnCompletion is not NoOp
+    txn ApplicationID
+    assert // can only call when not creating
+    // smart_contracts/hello_world/contract.py:11
+    // class PublishNews(ARC4Contract):
+    txna ApplicationArgs 1
+    extract 2 0
+    txna ApplicationArgs 2
+    extract 2 0
+    // smart_contracts/hello_world/contract.py:12
+    // @abimethod()
+    callsub publish
+    dup
+    len
+    itob
+    extract 6 2
+    swap
+    concat
+    pushbytes 0x151f7c75
+    swap
+    concat
+    log
+    pushint 1 // 1
+    return
+
+main_bare_routing@6:
+    // smart_contracts/hello_world/contract.py:11
+    // class PublishNews(ARC4Contract):
+    txn OnCompletion
+    bnz main_after_if_else@10
+    txn ApplicationID
+    !
+    assert // can only call when creating
+    pushint 1 // 1
+    return
+
+
+// smart_contracts.hello_world.contract.PublishNews.publish(title: bytes, content: bytes) -> bytes:
+publish:
+    // smart_contracts/hello_world/contract.py:12-13
+    // @abimethod()
+    // def publish(self, title: String, content: String) -> String:
+    proto 2 1
+    // smart_contracts/hello_world/contract.py:14
+    // return "Published news article: " + title + "\n" + content
+    pushbytes "Published news article: "
+    frame_dig -2
+    concat
+    pushbytes "\n"
+    concat
+    frame_dig -1
+    concat
+    retsub
